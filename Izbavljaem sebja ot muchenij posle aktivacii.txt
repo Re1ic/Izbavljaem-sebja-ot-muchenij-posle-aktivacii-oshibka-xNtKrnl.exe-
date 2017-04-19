@@ -1,0 +1,15 @@
+//Izbavljaem sebja ot muchenij posle metoda aktivacii kak ee nazyvajut ot m0nkrus (pri zagruzke oshibka xNtKrnl.exe)
+//Sozdaem tekstovyj dokument .txt i vnosim v nego jeti stroki:
+//Kod:
+DEL "%windir%\system32\drivers\oem-drv64.sys"
+DEL "%windir%\system32\xNtKrnl.exe"
+DEL "%windir%\system32\xOsLoad.exe"
+DEL "%windir%\System32\ru-RU\xOsLoad.exe.mui"
+DEL "%windir%\System32\en-US\xOsLoad.exe.mui"
+BCDEDIT /set {current} path \Windows\system32\winload.exe
+BCDEDIT /deletevalue {current} kernel
+BCDEDIT /deletevalue {current} nointegritychecks
+BCDEDIT /deletevalue {current} custom:26000027
+REG DELETE HKLM\SYSTEM\CurrentControlSet\services\oem-drv64 /va /f
+shutdown -r -t 0
+//Pereimenovyvaem rasshirenie .txt na .cmd i zapuskaem ot administratora, posle zagruzki windows 7 snova vse rabotaet krome aktivacii
